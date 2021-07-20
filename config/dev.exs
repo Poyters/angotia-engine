@@ -16,7 +16,7 @@ config :angotia_engine, AngotiaEngine.Repo,
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :angotia_engine, AngotiaEngineWeb.Endpoint,
-  http: [port: 4000],
+  http: [port: 4100],
   debug_errors: false,
   code_reloader: true,
   check_origin: false,

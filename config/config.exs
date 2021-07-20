@@ -13,6 +13,7 @@ config :angotia_engine,
 
 # Configures the endpoint
 config :angotia_engine, AngotiaEngineWeb.Endpoint,
+  http: [port: 4100],
   url: [host: "localhost"],
   secret_key_base: "QrkiletchCYWsdLT7yPE4Ak8fzH5gZWD3vz6IciVuawb3otdDskD8C0QFxDd0wZ5",
   render_errors: [view: AngotiaEngineWeb.ErrorView, accepts: ~w(json), layout: false],
