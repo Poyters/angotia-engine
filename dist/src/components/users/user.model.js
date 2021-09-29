@@ -22,11 +22,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserSchema = void 0;
 const mongoose = __importStar(require("mongoose"));
 const user_interface_1 = require("../../interfaces/user.interface");
-const accountType_model_1 = require("models/accountType.model");
 exports.UserSchema = new mongoose.Schema({
     created: { type: Number, required: true },
     ssoId: { type: String, required: true, unique: true },
-    accountType: { type: String, enum: accountType_model_1.AccountType, required: true },
     profile: {
         firstName: { type: String, required: true },
         lastName: { type: String, required: true },

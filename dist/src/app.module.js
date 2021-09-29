@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const mongoose_1 = require("@nestjs/mongoose");
+const typeorm_1 = require("@nestjs/typeorm");
 const core_1 = require("@nestjs/core");
 const nest_keycloak_connect_1 = require("nest-keycloak-connect");
 const throttler_1 = require("@nestjs/throttler");
@@ -17,15 +17,14 @@ const users_module_1 = require("./components/users/users.module");
 const info_service_1 = require("./components/info/info.service");
 const authentication_service_1 = require("./components/authentication/authentication.service");
 const authentication_module_1 = require("./components/authentication/authentication.module");
-const nestjs_prometheus_1 = require("@willsoto/nestjs-prometheus");
-const offers_module_1 = require("./components/offers/offers.module");
-const accessString = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_USER_PASSWORD}@cluster0.8pk4f.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+const postgre_config_1 = require("./configs/postgre.config");
+console.log("postgreConfig", postgre_config_1.postgreConfig);
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forRoot(accessString),
+            typeorm_1.TypeOrmModule.forRoot(postgre_config_1.postgreConfig),
             nest_keycloak_connect_1.KeycloakConnectModule.register({
                 authServerUrl: process.env.SSO_URL,
                 realm: process.env.SSO_REALM,
@@ -38,9 +37,7 @@ AppModule = __decorate([
             }),
             info_module_1.InfoModule,
             authentication_module_1.AuthenticationModule,
-            users_module_1.UsersModule,
-            offers_module_1.OffersModule,
-            nestjs_prometheus_1.PrometheusModule.register()
+            users_module_1.UsersModule
         ],
         providers: [
             {

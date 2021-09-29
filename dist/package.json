@@ -26,9 +26,10 @@
         "@nestjs/mongoose": "^8.0.1",
         "@nestjs/platform-express": "^8.0.6",
         "@nestjs/platform-fastify": "^8.0.6",
-        "@nestjs/swagger": "^5.0.9",
+        "@nestjs/swagger": "^5.1.0",
         "@nestjs/testing": "^8.0.6",
         "@nestjs/throttler": "^2.0.0",
+        "@nestjs/typeorm": "^8.0.2",
         "@willsoto/nestjs-prometheus": "^3.0.0",
         "dotenv": "^9.0.2",
         "eslint-plugin-prettier": "^3.3.1",
@@ -37,10 +38,13 @@
         "keycloak-connect": "^15.0.2",
         "mongoose": "^5.12.9",
         "nest-keycloak-connect": "^1.7.5",
+        "pg": "^8.7.1",
         "prom-client": "^13.1.0",
         "reflect-metadata": "^0.1.13",
         "rimraf": "^3.0.2",
-        "rxjs": "^7.1.0"
+        "rxjs": "^7.1.0",
+        "swagger-ui-express": "^4.1.6",
+        "typeorm": "^0.2.37"
     },
     "devDependencies": {
         "@nestjs/cli": "^7.6.0",

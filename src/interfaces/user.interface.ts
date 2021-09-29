@@ -4,36 +4,8 @@ So we cannot at this point connect API account to SSO account type (tenant | lan
 of MongoDB documents.
 */
 
-export interface IUserProfile {
-  firstName: string;
-  lastName: string;
-  description: string;
-  avatar: string;
-  backgroundPicture: string;
-
-  // Landlord
-  companyName?: string;
-  phone?: string;
-
-  // User
-  gender?: string;
-  age?: number;
-  pet?: IPetType;
-  keywords?: string[];
-}
-
-interface IPetType {
-  types: string[];
-  description?: string;
-}
-
-export interface IUserPublic {
-  _id: string;
+export interface IUser {
+  id: number;
   created: number;
-  profile: IUserProfile;
-}
-
-export interface INewUserDTO {
-  firstName: string;
-  lastName: string;
+  ssoId: string;
 }

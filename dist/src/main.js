@@ -26,7 +26,7 @@ async function bootstrap() {
         }
     });
     const config = new swagger_1.DocumentBuilder()
-        .setTitle("Goodrent API")
+        .setTitle("Angotia Engine API")
         .setVersion(package_json_1.default.version)
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);

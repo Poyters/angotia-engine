@@ -22,10 +22,8 @@ let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
     }
-    async addUser(token, newUserDTO) {
-        const newUserDTOJson = JSON.parse(newUserDTO);
-        const { accountType, firstName, lastName } = newUserDTOJson;
-        return await this.usersService.insertUser(token, accountType, firstName, lastName);
+    async addUser(token) {
+        return await this.usersService.insertUser(token);
     }
 };
 __decorate([
@@ -33,9 +31,8 @@ __decorate([
     (0, nest_keycloak_connect_1.Roles)({ roles: ["user"] }),
     openapi.ApiResponse({ status: 201, type: Object }),
     __param(0, (0, common_1.Headers)("Authorization")),
-    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "addUser", null);
 UsersController = __decorate([

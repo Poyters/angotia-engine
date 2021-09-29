@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { MongooseModule } from "@nestjs/mongoose";
+import { TypeOrmModule } from "@nestjs/typeorm";
 import { APP_GUARD } from "@nestjs/core";
 import {
   KeycloakConnectModule,
@@ -8,19 +8,17 @@ import {
   AuthGuard
 } from "nest-keycloak-connect";
 import { ThrottlerModule, ThrottlerGuard } from "@nestjs/throttler";
-import { InfoModule } from "./components/info/info.module";
-import { UsersModule } from "./components/users/users.module";
-import { InfoService } from "./components/info/info.service";
-import { AuthenticationService } from "./components/authentication/authentication.service";
-import { AuthenticationModule } from "./components/authentication/authentication.module";
-import { PrometheusModule } from "@willsoto/nestjs-prometheus";
-import { OffersModule } from "./components/offers/offers.module";
+import { InfoModule } from "components/info/info.module";
+import { UsersModule } from "components/users/users.module";
+import { InfoService } from "components/info/info.service";
+import { AuthenticationService } from "components/authentication/authentication.service";
+import { AuthenticationModule } from "components/authentication/authentication.module";
+import { postgreConfig } from "configs/postgre.config";
 
-const accessString = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_USER_PASSWORD}@cluster0.8pk4f.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
-
+console.log("postgreConfig", postgreConfig);
 @Module({
   imports: [
-    MongooseModule.forRoot(accessString),
+    TypeOrmModule.forRoot(postgreConfig),
     KeycloakConnectModule.register({
       authServerUrl: process.env.SSO_URL,
       realm: process.env.SSO_REALM,
@@ -33,9 +31,7 @@ const accessString = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_USER
     }),
     InfoModule,
     AuthenticationModule,
-    UsersModule,
-    OffersModule,
-    PrometheusModule.register()
+    UsersModule
   ],
   providers: [
     {

@@ -1,11 +1,11 @@
-import { Model } from "mongoose";
-import { IUser } from "./user.model";
+import { IUser } from "interfaces/user.interface";
 import { AuthenticationService } from "../authentication/authentication.service";
-import { AccountType } from "models/accountType.model";
+import { Repository } from "typeorm";
+import { User } from "./user.entity";
 export declare class UsersService {
-    private readonly userModel;
+    private readonly usersRepository;
     private authenticationService;
-    constructor(userModel: Model<IUser>, authenticationService: AuthenticationService);
-    insertUser(token: string, accountType: AccountType, firstName: string, lastName: string): Promise<IUser>;
+    constructor(usersRepository: Repository<User>, authenticationService: AuthenticationService);
+    insertUser(token: string): Promise<IUser>;
     private findBySsoId;
 }

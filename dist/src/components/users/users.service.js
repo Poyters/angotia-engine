@@ -14,20 +14,20 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
-const mongoose_1 = require("@nestjs/mongoose");
-const mongoose_2 = require("mongoose");
+const typeorm_1 = require("@nestjs/typeorm");
+const user_interface_1 = require("../../interfaces/user.interface");
 const authentication_service_1 = require("../authentication/authentication.service");
 const log_1 = require("../../scripts/utils/log");
-const userToPublic_1 = require("../../scripts/user/userToPublic");
-const user_interface_1 = require("../../interfaces/user.interface");
 const createNewUser_1 = require("../../scripts/user/createNewUser");
+const typeorm_2 = require("typeorm");
+const user_entity_1 = require("./user.entity");
 let UsersService = class UsersService {
-    constructor(userModel, authenticationService) {
-        this.userModel = userModel;
+    constructor(usersRepository, authenticationService) {
+        this.usersRepository = usersRepository;
         this.authenticationService = authenticationService;
     }
-    async insertUser(token, accountType, firstName, lastName) {
-        (0, log_1.log)("START_INSERT_USER", { accountType, firstName, lastName });
+    async insertUser(token) {
+        (0, log_1.log)("START_INSERT_USER");
         if (!token) {
             throw new common_1.HttpException("No access token", common_1.HttpStatus.UNAUTHORIZED);
         }
@@ -37,21 +37,20 @@ let UsersService = class UsersService {
             throw new common_1.HttpException("User already exists", common_1.HttpStatus.CONFLICT);
         }
         else {
-            const newUser = new this.userModel((0, createNewUser_1.createNewUser)(ssoId, accountType, firstName, lastName));
-            newUser.save();
-            (0, log_1.log)("FINISH_INSERT_USER", { ssoId, accountType, firstName, lastName });
+            const newUser = await this.usersRepository.save((0, createNewUser_1.createNewUser)(ssoId));
+            (0, log_1.log)("FINISH_INSERT_USER", { ssoId });
             return newUser;
         }
     }
     async findBySsoId(ssoId) {
         (0, log_1.log)("FIND_USER_BY_SSO", { ssoId });
-        return this.userModel.findOne({ ssoId: ssoId }).exec();
+        return this.usersRepository.findOne({ ssoId: ssoId });
     }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)("User")),
-    __metadata("design:paramtypes", [mongoose_2.Model,
+    __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
         authentication_service_1.AuthenticationService])
 ], UsersService);
 exports.UsersService = UsersService;
