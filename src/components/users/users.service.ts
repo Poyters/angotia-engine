@@ -51,10 +51,12 @@ export class UsersService {
     return user;
   }
 
-  // async findAllIds(): Promise<string[]> {
-  //   log("FIND_ALL_USERS_IDS");
-  //   return this.usersRepository.find({ select: ["id"] });
-  // }
+  async findAllIds(): Promise<string[]> {
+    log("FIND_ALL_USERS_IDS");
+
+    const objectIds = await this.usersRepository.find({ select: ["id"] });
+    return objectIds.map(objectId => Object.values(objectId)).flat();
+  }
 
   private async findBySsoId(ssoId: string): Promise<User | undefined> {
     log("FIND_USER_BY_SSO", { ssoId });

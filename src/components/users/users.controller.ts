@@ -21,9 +21,9 @@ export class UsersController {
     return await this.usersService.getUser(token);
   }
 
-  // @Get("ids")
-  // @Unprotected()
-  // async allIds() {
-  //   return await this.usersService.findAllIds();
-  // }
+  @Get("ids")
+  @Unprotected()
+  async allIds() {
+    return await this.usersService.findAllIds();
+  }
 }
