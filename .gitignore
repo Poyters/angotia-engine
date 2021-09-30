@@ -28,6 +28,6 @@ yarn-error.log*
 .vercel
 
 # Nest.js build output
-
+dist
 
 .env
