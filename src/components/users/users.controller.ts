@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Headers, Body, Param } from "@nestjs/common";
+import { Controller, Post, Get, Headers } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { Roles, Unprotected } from "nest-keycloak-connect";
 import { ApiTags } from "@nestjs/swagger";
