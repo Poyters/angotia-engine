@@ -15,11 +15,11 @@ export class UsersController {
   }
 
   // Returns all data of user that made request
-  // @Get("profile")
-  // @Roles({ roles: ["user"] })
-  // async getUser(@Headers("Authorization") token: string) {
-  //   return await this.usersService.getUser(token);
-  // }
+  @Get("profile")
+  @Roles({ roles: ["user"] })
+  async getUser(@Headers("Authorization") token: string) {
+    return await this.usersService.getUser(token);
+  }
 
   // @Get("ids")
   // @Unprotected()

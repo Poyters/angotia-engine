@@ -1,9 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { IUser } from "interfaces/user.interface";
 import { AuthenticationService } from "../authentication/authentication.service";
 import { log } from "../../scripts/utils/log";
-import { createNewUser } from "scripts/user/createNewUser";
 import { Repository } from "typeorm";
 import { User } from "./user.entity";
 
@@ -40,18 +38,18 @@ export class UsersService {
     }
   }
 
-  // async getUser(token: string): Promise<IUser> {
-  //   log("START_GET_USER");
-  //   const ssoId = await this.authenticationService.authenticate(token);
-  //   const user = await this.findBySsoId(ssoId);
+  async getUser(token: string): Promise<User> {
+    log("START_GET_USER");
+    const ssoId = await this.authenticationService.authenticate(token);
+    const user = await this.findBySsoId(ssoId);
 
-  //   if (!user) {
-  //     throw new HttpException("User not found", HttpStatus.NOT_FOUND);
-  //   }
+    if (!user) {
+      throw new HttpException("User not found", HttpStatus.NOT_FOUND);
+    }
 
-  //   log("FINISH_GET_USER", { ssoId });
-  //   return user;
-  // }
+    log("FINISH_GET_USER", { ssoId });
+    return user;
+  }
 
   // async findAllIds(): Promise<string[]> {
   //   log("FIND_ALL_USERS_IDS");
