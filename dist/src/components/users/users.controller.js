@@ -29,7 +29,7 @@ let UsersController = class UsersController {
 __decorate([
     (0, common_1.Post)("create"),
     (0, nest_keycloak_connect_1.Roles)({ roles: ["user"] }),
-    openapi.ApiResponse({ status: 201, type: Object }),
+    openapi.ApiResponse({ status: 201, type: require("./user.entity").User }),
     __param(0, (0, common_1.Headers)("Authorization")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

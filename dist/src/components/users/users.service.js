@@ -37,7 +37,11 @@ let UsersService = class UsersService {
             throw new common_1.HttpException("User already exists", common_1.HttpStatus.CONFLICT);
         }
         else {
-            const newUser = await this.usersRepository.save((0, createNewUser_1.createNewUser)(ssoId));
+            const newUser = new user_entity_1.User();
+            newUser.ssoId = ssoId;
+            newUser.created = Date.now();
+            console.log("newUser", newUser);
+            await this.usersRepository.save(newUser);
             (0, log_1.log)("FINISH_INSERT_USER", { ssoId });
             return newUser;
         }

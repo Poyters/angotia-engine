@@ -15,7 +15,7 @@ export class UsersService {
     private authenticationService: AuthenticationService
   ) {}
 
-  async insertUser(token: string): Promise<IUser> {
+  async insertUser(token: string): Promise<User> {
     log("START_INSERT_USER");
 
     if (!token) {
@@ -28,7 +28,12 @@ export class UsersService {
     if (existingUser) {
       throw new HttpException("User already exists", HttpStatus.CONFLICT);
     } else {
-      const newUser = await this.usersRepository.save(createNewUser(ssoId));
+      const newUser = new User();
+      newUser.ssoId = ssoId;
+      newUser.created = Date.now();
+      console.log("newUser", newUser);
+      await this.usersRepository.save(newUser);
+
       log("FINISH_INSERT_USER", { ssoId });
 
       return newUser;
@@ -53,7 +58,7 @@ export class UsersService {
   //   return this.usersRepository.find({ select: ["id"] });
   // }
 
-  private async findBySsoId(ssoId: string): Promise<IUser | undefined> {
+  private async findBySsoId(ssoId: string): Promise<User | undefined> {
     log("FIND_USER_BY_SSO", { ssoId });
     return this.usersRepository.findOne({ ssoId: ssoId });
   }

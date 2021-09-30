@@ -1,5 +1,6 @@
 export declare class User {
-    id: number;
+    id: string;
     created: number;
     ssoId: string;
+    genarate(): void;
 }
