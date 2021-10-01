@@ -9,7 +9,7 @@ import {
 } from "nest-keycloak-connect";
 import { ThrottlerModule, ThrottlerGuard } from "@nestjs/throttler";
 import { InfoModule } from "components/info/info.module";
-import { UsersModule } from "components/users/users.module";
+import { UserModule } from "components/user/user.module";
 import { InfoService } from "components/info/info.service";
 import { AuthenticationService } from "components/authentication/authentication.service";
 import { AuthenticationModule } from "components/authentication/authentication.module";
@@ -31,7 +31,7 @@ console.log("postgreConfig", postgreConfig);
     }),
     InfoModule,
     AuthenticationModule,
-    UsersModule
+    UserModule
   ],
   providers: [
     {

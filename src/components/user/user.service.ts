@@ -6,10 +6,10 @@ import { Repository } from "typeorm";
 import { User } from "./user.entity";
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
     @InjectRepository(User)
-    private readonly usersRepository: Repository<User>,
+    private readonly userRepository: Repository<User>,
     private authenticationService: AuthenticationService
   ) {}
 
@@ -29,8 +29,8 @@ export class UsersService {
       const newUser = new User();
       newUser.ssoId = ssoId;
       newUser.created = Date.now();
-      console.log("newUser", newUser);
-      await this.usersRepository.save(newUser);
+
+      await this.userRepository.save(newUser);
 
       log("FINISH_INSERT_USER", { ssoId });
 
@@ -54,12 +54,12 @@ export class UsersService {
   async findAllIds(): Promise<string[]> {
     log("FIND_ALL_USERS_IDS");
 
-    const objectIds = await this.usersRepository.find({ select: ["id"] });
+    const objectIds = await this.userRepository.find({ select: ["id"] });
     return objectIds.map(objectId => Object.values(objectId)).flat();
   }
 
   private async findBySsoId(ssoId: string): Promise<User | undefined> {
     log("FIND_USER_BY_SSO", { ssoId });
-    return this.usersRepository.findOne({ ssoId: ssoId });
+    return this.userRepository.findOne({ ssoId: ssoId });
   }
 }
