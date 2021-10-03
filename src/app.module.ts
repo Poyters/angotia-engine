@@ -10,6 +10,7 @@ import {
 import { ThrottlerModule, ThrottlerGuard } from "@nestjs/throttler";
 import { InfoModule } from "components/info/info.module";
 import { UserModule } from "components/user/user.module";
+import { CharacterModule } from "components/character/character.module";
 import { InfoService } from "components/info/info.service";
 import { AuthenticationService } from "components/authentication/authentication.service";
 import { AuthenticationModule } from "components/authentication/authentication.module";
@@ -31,7 +32,8 @@ console.log("postgreConfig", postgreConfig);
     }),
     InfoModule,
     AuthenticationModule,
-    UserModule
+    UserModule,
+    CharacterModule
   ],
   providers: [
     {

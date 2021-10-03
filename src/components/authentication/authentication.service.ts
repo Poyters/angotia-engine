@@ -34,8 +34,14 @@ export class AuthenticationService {
       });
 
       const reponseJson = (await response.json()) as KeycloakUserInfoResponse;
+      const ssoId = reponseJson?.sub;
 
-      return reponseJson?.sub ?? null;
+      if (ssoId) {
+        log("AUTHENTICATED_BY_TOKEN", { ssoId });
+        return ssoId;
+      }
+
+      return null;
     } catch (e) {
       throw new AuthenticationError(e.message);
     }

@@ -20,32 +20,11 @@ export const logsConfig = {
   FINISH_GET_USER: {
     message: "Finished getting user profile"
   },
-  START_GET_EVERY_USER_PUBLIC_DATA: {
-    message: "Started fetching every user public data"
-  },
-  FINISH_GET_EVERY_USER_PUBLIC_DATA: {
-    message: "Finished fetching every user public data"
-  },
-  START_GET_PUBLIC_USER: {
-    message: "Started getting user public data"
-  },
-  FINISH_GET_PUBLIC_USER: {
-    message: "Finished getting user public data"
-  },
-  START_UPDATE_USER_PROFILE: {
-    message: "Started updating user profile"
-  },
-  FINISH_UPDATE_USER_PROFILE: {
-    message: "Finished updating user profile"
-  },
   AUTHENTICATE_BY_TOKEN: {
     message: "Start authenticating by passed token"
   },
   FIND_USER_BY_SSO: {
     message: "Started looking for user by passed sso id"
-  },
-  FIND_PUBLIC_USER_BY_SSO: {
-    message: "Started looking for public user by passed sso id"
   },
   FIND_USER_BY_ID: {
     message: "Started looking for user by passed id"
@@ -53,31 +32,25 @@ export const logsConfig = {
   FIND_ALL_USERS: {
     message: "Started looking for all users"
   },
-  START_CREATE_NEW_OFFER: {
-    message: "Create new offer..."
-  },
-  FINISH_CREATE_NEW_OFFER: {
-    message: "Created new offer"
-  },
-  FIND_ALL_OFFERS_IDS: {
-    message: "Finding all offers ids"
-  },
   FIND_ALL_USERS_IDS: {
     message: "Finding all users ids"
   },
   START_FIND_OFFER_BY_ID: {
     message: "Finding offer by id..."
   },
-  FINISH_FIND_OFFER_BY_ID: {
-    message: "Found offer by id"
+  GET_USER_CHARACTERS: {
+    message: "Start getting user characters"
   },
-  START_FIND_ALL_SUMMARIES: {
-    message: "Finding offer all summaries"
+  GOT_USER_CHARACTERS: {
+    message: "Finished getting user characters"
   },
-  START_FIND_SUMMARY_BY_ID: {
-    message: "Finding offer summary by id..."
+  START_INSERTING_CHAR: {
+    message: "Start inserting user"
   },
-  FINISH_FIND_SUMMARY_BY_ID: {
-    message: "Found offer summary by id"
+  FINISHED_INSERTING_CHAR: {
+    message: "Finished inserting user"
+  },
+  AUTHENTICATED_BY_TOKEN: {
+    message: "Authenticated by token"
   }
 };

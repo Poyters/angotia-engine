@@ -1,8 +1,8 @@
 {
-  "name": "goodrent",
-  "version": "0.8.0",
+  "name": "angotia-engine",
+  "version": "0.1.0",
   "description": "",
-  "author": "Rafał Gabriel Kostecki, Marek Choiński",
+  "author": "Rafał Gabriel Kostecki",
   "license": "Apache 2.0",
   "scripts": {
     "prebuild": "rimraf dist",

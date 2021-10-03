@@ -4,6 +4,7 @@ import { AuthenticationService } from "../authentication/authentication.service"
 import { log } from "../../scripts/utils/log";
 import { Repository } from "typeorm";
 import { User } from "./user.entity";
+import { Character } from "components/character/character.entity";
 
 @Injectable()
 export class UserService {
@@ -51,6 +52,40 @@ export class UserService {
     return user;
   }
 
+  async getCharacters(token: string): Promise<Character[]> {
+    log("GET_USER_CHARACTERS");
+    const ssoId = await this.authenticationService.authenticate(token);
+    const user = await this.findBySsoId(ssoId);
+
+    if (!user) {
+      throw new HttpException("User not found", HttpStatus.NOT_FOUND);
+    }
+
+    const userRelations = await this.userRepository.findOne({
+      where: { ssoId: ssoId },
+      relations: ["characters"]
+    });
+
+    const chars = userRelations?.characters;
+
+    log("GOT_USER_CHARACTERS", { charsQuantity: chars?.length ?? 0 });
+    return chars;
+  }
+
+  async getCharacter(token: string, charId: string): Promise<Character> {
+    log("GET_USER_CHARACTER");
+    const char = (await this.getCharacters(token))?.filter(
+      char => char.id === charId
+    )[0];
+
+    if (!char) {
+      throw new HttpException("Character not found", HttpStatus.NOT_FOUND);
+    }
+
+    log("GOT_USER_CHARACTER", { charId: char.id });
+    return char;
+  }
+
   async findAllIds(): Promise<string[]> {
     log("FIND_ALL_USERS_IDS");
 
@@ -58,8 +93,9 @@ export class UserService {
     return objectIds.map(objectId => Object.values(objectId)).flat();
   }
 
-  private async findBySsoId(ssoId: string): Promise<User | undefined> {
+  async findBySsoId(ssoId: string): Promise<User | undefined> {
     log("FIND_USER_BY_SSO", { ssoId });
+
     return this.userRepository.findOne({ ssoId: ssoId });
   }
 }
