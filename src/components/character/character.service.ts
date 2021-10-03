@@ -39,7 +39,6 @@ export class CharacterService {
     }
 
     const existingChar = await this.findByNick(newCharacterDto.nick);
-    console.log("existingChar", existingChar);
 
     if (existingChar) {
       throw new HttpException(
@@ -49,10 +48,15 @@ export class CharacterService {
     }
 
     const newCharacter = new Character();
+    console.log("newCharacter", newCharacter);
     newCharacter.created = Date.now();
     newCharacter.gender = newCharacterDto.gender;
     newCharacter.nick = newCharacterDto.nick;
     newCharacter.user = user;
+
+    console.log("sprite", newCharacter.sprite);
+
+    if (newCharacterDto?.sprite) newCharacter.sprite = newCharacterDto.sprite;
 
     await this.characterRepository.save(newCharacter);
 

@@ -5,3 +5,4 @@
 - AG-9, Set up `postgres` and `typeorm`. Add ability to create user protected by `Keycloak`
 - AG-25, Add `eslint` and `prettier`
 - AG-10, Add ability to create a new character
+- AG-24, Add sprite to character entity

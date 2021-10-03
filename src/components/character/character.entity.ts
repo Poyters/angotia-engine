@@ -1,14 +1,21 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   BeforeInsert,
-  ManyToOne
+  ManyToOne,
+  Index
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Gender } from "models/gender.model";
 import { User } from "components/user/user.entity";
+import userConfig from "configs/user.config.json";
 
+console.log(
+  "userConfig.characters.defaultSprite",
+  userConfig.characters.defaultSprite
+);
 @Entity("character")
 export class Character {
   @PrimaryGeneratedColumn("uuid")
@@ -17,17 +24,22 @@ export class Character {
   @Column()
   created: number;
 
-  @Column({ default: 0 })
-  timeSpent: number;
+  @Column()
+  timeSpent: number = 0;
 
   @Column()
   gender: Gender;
 
+  @Index({ unique: true })
   @Column()
   nick: string;
 
-  @Column({ default: 1 })
-  level: number;
+  // Url to sprite on CDN
+  @Column()
+  sprite: string = userConfig.characters.defaultSprite;
+
+  @Column()
+  level: number = 1;
 
   @ManyToOne(
     () => User,
