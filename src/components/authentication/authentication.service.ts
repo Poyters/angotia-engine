@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import fetch from "node-fetch";
-import { log } from "../../scripts/utils/log";
+import { logger } from "../../scripts/utils/logger";
 
 interface KeycloakUserInfoResponse {
   sub: string;
@@ -23,7 +23,7 @@ export class AuthenticationService {
    * If it fails, the token is invalid or expired
    */
   async authenticate(token: string): Promise<string | null> {
-    log("AUTHENTICATE_BY_TOKEN");
+    logger.write("AUTHENTICATE_BY_TOKEN");
     const url = `${process.env.SSO_URL}/realms/${process.env.SSO_REALM}/protocol/openid-connect/userinfo`;
 
     try {
@@ -37,7 +37,7 @@ export class AuthenticationService {
       const ssoId = reponseJson?.sub;
 
       if (ssoId) {
-        log("AUTHENTICATED_BY_TOKEN", { ssoId });
+        logger.write("AUTHENTICATED_BY_TOKEN", { ssoId });
         return ssoId;
       }
 

@@ -1,11 +1,11 @@
 import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { AuthenticationService } from "../authentication/authentication.service";
-import { log } from "../../scripts/utils/log";
+import { logger } from "../../scripts/utils/logger";
 import { Repository } from "typeorm";
 import { Character } from "./character.entity";
 import { UserService } from "components/user/user.service";
-import userConfig from "configs/user.config.json";
+import { userConfig } from "angotia-sdk";
 import { NewCharacterDto } from "./newCharacter.dto";
 
 @Injectable()
@@ -21,7 +21,7 @@ export class CharacterService {
     token: string,
     newCharacterDto: NewCharacterDto
   ): Promise<Character> {
-    log("START_INSERTING_CHAR");
+    logger.write("START_INSERTING_CHAR");
 
     if (!token) {
       throw new HttpException("No access token", HttpStatus.UNAUTHORIZED);
@@ -48,25 +48,22 @@ export class CharacterService {
     }
 
     const newCharacter = new Character();
-    console.log("newCharacter", newCharacter);
     newCharacter.created = Date.now();
     newCharacter.gender = newCharacterDto.gender;
     newCharacter.nick = newCharacterDto.nick;
     newCharacter.user = user;
 
-    console.log("sprite", newCharacter.sprite);
-
     if (newCharacterDto?.sprite) newCharacter.sprite = newCharacterDto.sprite;
 
     await this.characterRepository.save(newCharacter);
 
-    log("FINISHED_INSERTING_CHAR", { ssoId });
+    logger.write("FINISHED_INSERTING_CHAR", { ssoId });
 
     return newCharacter;
   }
 
   async findByNick(nick: string): Promise<Character | undefined> {
-    log("FIND_USER_BY_SSO", { nick });
+    logger.write("FIND_USER_BY_SSO", { nick });
     return this.characterRepository.findOne({ nick });
   }
 }

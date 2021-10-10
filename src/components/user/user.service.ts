@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { AuthenticationService } from "../authentication/authentication.service";
-import { log } from "../../scripts/utils/log";
+import { logger } from "../../scripts/utils/logger";
 import { Repository } from "typeorm";
 import { User } from "./user.entity";
 import { Character } from "components/character/character.entity";
@@ -15,7 +15,7 @@ export class UserService {
   ) {}
 
   async insertUser(token: string): Promise<User> {
-    log("START_INSERT_USER");
+    logger.write("START_INSERT_USER");
 
     if (!token) {
       throw new HttpException("No access token", HttpStatus.UNAUTHORIZED);
@@ -33,14 +33,14 @@ export class UserService {
 
       await this.userRepository.save(newUser);
 
-      log("FINISH_INSERT_USER", { ssoId });
+      logger.write("FINISH_INSERT_USER", { ssoId });
 
       return newUser;
     }
   }
 
   async getUser(token: string): Promise<User> {
-    log("START_GET_USER");
+    logger.write("START_GET_USER");
     const ssoId = await this.authenticationService.authenticate(token);
     const user = await this.findBySsoId(ssoId);
 
@@ -48,12 +48,12 @@ export class UserService {
       throw new HttpException("User not found", HttpStatus.NOT_FOUND);
     }
 
-    log("FINISH_GET_USER", { ssoId });
+    logger.write("FINISH_GET_USER", { ssoId });
     return user;
   }
 
   async getCharacters(token: string): Promise<Character[]> {
-    log("GET_USER_CHARACTERS");
+    logger.write("GET_USER_CHARACTERS");
     const ssoId = await this.authenticationService.authenticate(token);
     const user = await this.findBySsoId(ssoId);
 
@@ -68,12 +68,12 @@ export class UserService {
 
     const chars = userRelations?.characters;
 
-    log("GOT_USER_CHARACTERS", { charsQuantity: chars?.length ?? 0 });
+    logger.write("GOT_USER_CHARACTERS", { charsQuantity: chars?.length ?? 0 });
     return chars;
   }
 
   async getCharacter(token: string, charId: string): Promise<Character> {
-    log("GET_USER_CHARACTER");
+    logger.write("GET_USER_CHARACTER");
     const char = (await this.getCharacters(token))?.filter(
       char => char.id === charId
     )[0];
@@ -82,19 +82,19 @@ export class UserService {
       throw new HttpException("Character not found", HttpStatus.NOT_FOUND);
     }
 
-    log("GOT_USER_CHARACTER", { charId: char.id });
+    logger.write("GOT_USER_CHARACTER", { charId: char.id });
     return char;
   }
 
   async findAllIds(): Promise<string[]> {
-    log("FIND_ALL_USERS_IDS");
+    logger.write("FIND_ALL_USERS_IDS");
 
     const objectIds = await this.userRepository.find({ select: ["id"] });
     return objectIds.map(objectId => Object.values(objectId)).flat();
   }
 
   async findBySsoId(ssoId: string): Promise<User | undefined> {
-    log("FIND_USER_BY_SSO", { ssoId });
+    logger.write("FIND_USER_BY_SSO", { ssoId });
 
     return this.userRepository.findOne({ ssoId: ssoId });
   }

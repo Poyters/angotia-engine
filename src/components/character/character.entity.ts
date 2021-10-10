@@ -8,14 +8,9 @@ import {
   Index
 } from "typeorm";
 import { v4 as uuid } from "uuid";
-import { Gender } from "models/gender.model";
+import { Gender, userConfig } from "angotia-sdk";
 import { User } from "components/user/user.entity";
-import userConfig from "configs/user.config.json";
 
-console.log(
-  "userConfig.characters.defaultSprite",
-  userConfig.characters.defaultSprite
-);
 @Entity("character")
 export class Character {
   @PrimaryGeneratedColumn("uuid")

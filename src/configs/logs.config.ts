@@ -1,4 +1,4 @@
-import { Log } from "../models/log.model";
+import { Log } from "angotia-sdk";
 
 export const logsConfig = {
   UNKNOWN_LOG: {

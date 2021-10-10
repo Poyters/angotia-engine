@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "angotia-sdk": {
+      "signature": "453658b7ea463e3b88a52bdc9983d7f8",
+      "file": true
+    }
+  }
+}

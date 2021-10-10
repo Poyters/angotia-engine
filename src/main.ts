@@ -5,7 +5,7 @@ import {
   NestFastifyApplication
 } from "@nestjs/platform-fastify";
 import { AppModule } from "./app.module";
-import { log } from "./scripts/utils/log";
+import { logger } from "./scripts/utils/logger";
 import appConfig from "./configs/app.config.json";
 import pckg from "../package.json";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
@@ -39,7 +39,7 @@ async function bootstrap() {
 
   await app.listen(appConfig.port, appConfig.hostname);
 
-  log("APP_STARTED", {
+  logger.write("APP_STARTED", {
     version: pckg.version,
     port: appConfig.port,
     hostname: appConfig.hostname

@@ -18,7 +18,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "yalc:add": "yalc add angotia-sdk"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.6",
@@ -31,6 +32,7 @@
     "@nestjs/throttler": "^2.0.0",
     "@nestjs/typeorm": "^8.0.2",
     "@willsoto/nestjs-prometheus": "^3.0.0",
+    "angotia-sdk": "file:.yalc/angotia-sdk",
     "dotenv": "^9.0.2",
     "eslint-plugin-prettier": "^3.3.1",
     "fastify-helmet": "^5.3.2",
