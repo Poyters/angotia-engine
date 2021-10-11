@@ -16,7 +16,6 @@ import { AuthenticationService } from "components/authentication/authentication.
 import { AuthenticationModule } from "components/authentication/authentication.module";
 import { postgreConfig } from "configs/postgre.config";
 
-console.log("postgreConfig", postgreConfig);
 @Module({
   imports: [
     TypeOrmModule.forRoot(postgreConfig),

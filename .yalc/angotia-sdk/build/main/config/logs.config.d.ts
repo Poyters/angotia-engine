@@ -43,4 +43,24 @@ export declare const logsConfig: {
         message: string;
         level: Log;
     };
+    FETCH_USER_CHARACTERS: {
+        message: string;
+    };
+    FETCHED_USER_CHARACTERS: {
+        message: string;
+    };
+    FETCH_USER_CHARACTERS_ERR: {
+        message: string;
+        level: Log;
+    };
+    FETCH_CHARACTER_BY_NICK: {
+        message: string;
+    };
+    FETCHED_CHARACTER_BY_NICK: {
+        message: string;
+    };
+    FETCH_CHARACTER_BY_NICK_ERR: {
+        message: string;
+        level: Log;
+    };
 };

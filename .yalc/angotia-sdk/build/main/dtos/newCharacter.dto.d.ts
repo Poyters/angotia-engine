@@ -1,5 +1,5 @@
 import { Gender } from "../models/gender.model";
-export declare class NewCharacterDto {
+export interface NewCharacter {
     nick: string;
     gender: Gender;
     sprite?: string;

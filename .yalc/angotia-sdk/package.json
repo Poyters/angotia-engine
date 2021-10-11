@@ -21,7 +21,7 @@
     "node": ">=10"
   },
   "dependencies": {
-    "node-fetch": "^3.0.0"
+    "axios": "^0.22.0"
   },
   "files": [
     "build/main",
@@ -53,5 +53,5 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   },
-  "yalcSig": "453658b7ea463e3b88a52bdc9983d7f8"
+  "yalcSig": "9aee392391f00755abd41acdb245977a"
 }

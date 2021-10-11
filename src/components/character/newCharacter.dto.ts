@@ -1,6 +1,7 @@
-import { NewCharacterDto as NewCharacterDtoSDK } from "angotia-sdk";
+import { Gender, NewCharacter } from "angotia-sdk";
 
-export class NewCharacterDto extends NewCharacterDtoSDK {
-  hejka: string;
-  xd: string;
+export class NewCharacterDto implements NewCharacter {
+  nick: string;
+  gender: Gender;
+  sprite?: string;
 }

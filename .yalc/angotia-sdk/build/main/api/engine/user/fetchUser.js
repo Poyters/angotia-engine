@@ -41,39 +41,52 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchUser = void 0;
 var logger_1 = require("../../../config/logger");
-var node_fetch_1 = __importDefault(require("node-fetch"));
+var config_1 = require("../config");
+var axios_1 = __importDefault(require("axios"));
+/**
+ * Creates Angotia user (API) based on token. There is possibility to create
+ * only one "Angotia Account" related to SSO account. So sso id is hightly
+ * connected with "Angotia Account"
+ *
+ * ### Example
+ * ```js
+ * createUser("token")
+ * // => [null, User]
+ * ```
+ *
+ * @param token - Token provided by SSO
+ * @returns Tuple of [Error, User]
+ */
 var fetchUser = function (token) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, responseBody, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var response, responseData, error_1;
+    var _a, _b;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
             case 0:
                 logger_1.logger.write("FETCHING_ANGOTIA_USER");
-                _a.label = 1;
+                _c.label = 1;
             case 1:
-                _a.trys.push([1, 4, , 5]);
-                return [4 /*yield*/, (0, node_fetch_1.default)(process.env.NEXT_PUBLIC_ENGINE_URL + "/user/profile", {
+                _c.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, (0, axios_1.default)(config_1.engineApiUrl + "/user/profile", {
                         method: "GET",
                         headers: {
                             Authorization: "Bearer " + token
                         }
                     })];
             case 2:
-                response = _a.sent();
-                return [4 /*yield*/, response.json()];
+                response = _c.sent();
+                responseData = response.data;
+                logger_1.logger.write("FETCHED_ANGOTIA_USER", { responseData: responseData });
+                return [2 /*return*/, [null, responseData]];
             case 3:
-                responseBody = _a.sent();
-                logger_1.logger.write("FETCHED_ANGOTIA_USER", { responseBody: responseBody });
-                if (response.status !== 200 && response.status !== 201) {
-                    return [2 /*return*/, [responseBody, null]];
-                }
-                return [2 /*return*/, [null, responseBody]];
-            case 4:
-                error_1 = _a.sent();
-                logger_1.logger.write("FETCH_ANGOTIA_USER_ERROR", { error: error_1 });
-                throw new Error(error_1);
-            case 5: return [2 /*return*/];
+                error_1 = _c.sent();
+                logger_1.logger.write("FETCH_ANGOTIA_USER_ERROR", {
+                    error: (_b = (_a = error_1 === null || error_1 === void 0 ? void 0 : error_1.response) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.statusCode
+                });
+                return [2 /*return*/, [error_1.response.data, null]];
+            case 4: return [2 /*return*/];
         }
     });
 }); };
 exports.fetchUser = fetchUser;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmV0Y2hVc2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vc3JjL2FwaS9lbmdpbmUvdXNlci9mZXRjaFVzZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0EsaURBQWdEO0FBRWhELDBEQUErQjtBQUV4QixJQUFNLFNBQVMsR0FBRyxVQUFPLEtBQWE7Ozs7O2dCQUMzQyxlQUFNLENBQUMsS0FBSyxDQUFDLHVCQUF1QixDQUFDLENBQUM7Ozs7Z0JBR25CLHFCQUFNLElBQUEsb0JBQUssRUFDdkIsT0FBTyxDQUFDLEdBQUcsQ0FBQyxzQkFBc0Isa0JBQWUsRUFDcEQ7d0JBQ0UsTUFBTSxFQUFFLEtBQUs7d0JBQ2IsT0FBTyxFQUFFOzRCQUNQLGFBQWEsRUFBRSxZQUFVLEtBQU87eUJBQ2pDO3FCQUNGLENBQ0YsRUFBQTs7Z0JBUkssUUFBUSxHQUFHLFNBUWhCO2dCQUVvQixxQkFBTSxRQUFRLENBQUMsSUFBSSxFQUFFLEVBQUE7O2dCQUFwQyxZQUFZLEdBQUcsU0FBcUI7Z0JBRTFDLGVBQU0sQ0FBQyxLQUFLLENBQUMsc0JBQXNCLEVBQUUsRUFBRSxZQUFZLGNBQUEsRUFBRSxDQUFDLENBQUM7Z0JBRXZELElBQUksUUFBUSxDQUFDLE1BQU0sS0FBSyxHQUFHLElBQUksUUFBUSxDQUFDLE1BQU0sS0FBSyxHQUFHLEVBQUU7b0JBQ3RELHNCQUFPLENBQUMsWUFBcUIsRUFBRSxJQUFJLENBQUMsRUFBQztpQkFDdEM7Z0JBRUQsc0JBQU8sQ0FBQyxJQUFJLEVBQUUsWUFBb0IsQ0FBQyxFQUFDOzs7Z0JBRXBDLGVBQU0sQ0FBQyxLQUFLLENBQUMsMEJBQTBCLEVBQUUsRUFBRSxLQUFLLFNBQUEsRUFBRSxDQUFDLENBQUM7Z0JBQ3BELE1BQU0sSUFBSSxLQUFLLENBQUMsT0FBSyxDQUFDLENBQUM7Ozs7S0FFMUIsQ0FBQztBQTNCVyxRQUFBLFNBQVMsYUEyQnBCIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmV0Y2hVc2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vc3JjL2FwaS9lbmdpbmUvdXNlci9mZXRjaFVzZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0EsaURBQWdEO0FBRWhELG9DQUF5QztBQUN6QyxnREFBMEI7QUFFMUI7Ozs7Ozs7Ozs7Ozs7R0FhRztBQUNJLElBQU0sU0FBUyxHQUFHLFVBQU8sS0FBYTs7Ozs7O2dCQUMzQyxlQUFNLENBQUMsS0FBSyxDQUFDLHVCQUF1QixDQUFDLENBQUM7Ozs7Z0JBR25CLHFCQUFNLElBQUEsZUFBSyxFQUFJLHFCQUFZLGtCQUFlLEVBQUU7d0JBQzNELE1BQU0sRUFBRSxLQUFLO3dCQUNiLE9BQU8sRUFBRTs0QkFDUCxhQUFhLEVBQUUsWUFBVSxLQUFPO3lCQUNqQztxQkFDRixDQUFDLEVBQUE7O2dCQUxJLFFBQVEsR0FBRyxTQUtmO2dCQUVJLFlBQVksR0FBRyxRQUFRLENBQUMsSUFBSSxDQUFDO2dCQUVuQyxlQUFNLENBQUMsS0FBSyxDQUFDLHNCQUFzQixFQUFFLEVBQUUsWUFBWSxjQUFBLEVBQUUsQ0FBQyxDQUFDO2dCQUV2RCxzQkFBTyxDQUFDLElBQUksRUFBRSxZQUFvQixDQUFDLEVBQUM7OztnQkFFcEMsZUFBTSxDQUFDLEtBQUssQ0FBQywwQkFBMEIsRUFBRTtvQkFDdkMsS0FBSyxFQUFFLE1BQUEsTUFBQSxPQUFLLGFBQUwsT0FBSyx1QkFBTCxPQUFLLENBQUUsUUFBUSwwQ0FBRSxJQUFJLDBDQUFFLFVBQVU7aUJBQ3pDLENBQUMsQ0FBQztnQkFDSCxzQkFBTyxDQUFDLE9BQUssQ0FBQyxRQUFRLENBQUMsSUFBYSxFQUFFLElBQUksQ0FBQyxFQUFDOzs7O0tBRS9DLENBQUM7QUF0QlcsUUFBQSxTQUFTLGFBc0JwQiJ9

@@ -62,8 +62,14 @@ export class CharacterService {
     return newCharacter;
   }
 
-  async findByNick(nick: string): Promise<Character | undefined> {
+  async findByNick(nick: string): Promise<Character> {
     logger.write("FIND_USER_BY_SSO", { nick });
-    return this.characterRepository.findOne({ nick });
+    const char = await this.characterRepository.findOne({ nick });
+
+    if (!char) {
+      throw new HttpException("Character not found", HttpStatus.NOT_FOUND);
+    }
+
+    return char;
   }
 }
