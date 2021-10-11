@@ -31,4 +31,5 @@ yarn-error.log*
 dist
 
 .env
-
+.yalc
+/.yalc
