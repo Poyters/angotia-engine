@@ -31,14 +31,14 @@ export class CharacterService {
     const user = await this.userService.findBySsoId(ssoId);
     const userChars = await this.userService.getCharacters(token);
 
-    if (userChars?.length >= userConfig.characters.max) {
+    if (userChars?.length >= userConfig.characters.quantity.max) {
       throw new HttpException(
         "The user reached maximum quantity of characters",
         HttpStatus.UNPROCESSABLE_ENTITY
       );
     }
 
-    const existingChar = await this.findByNick(newCharacterDto.nick);
+    const existingChar = await this.findByNick(newCharacterDto.nick, true);
 
     if (existingChar) {
       throw new HttpException(
@@ -53,20 +53,26 @@ export class CharacterService {
     newCharacter.nick = newCharacterDto.nick;
     newCharacter.user = user;
 
-    if (newCharacterDto?.sprite) newCharacter.sprite = newCharacterDto.sprite;
+    if (!newCharacterDto?.sprite) {
+      const defaultSprite =
+        userConfig.characters.sprite.default[newCharacterDto.gender];
+      console.log("defaultSprite", defaultSprite);
+      newCharacter.sprite = defaultSprite;
+    }
 
     await this.characterRepository.save(newCharacter);
 
-    logger.write("FINISHED_INSERTING_CHAR", { ssoId });
+    logger.write("FINISHED_INSERTING_CHAR", { ssoId, newCharacterDto });
 
     return newCharacter;
   }
 
-  async findByNick(nick: string): Promise<Character> {
+  // Plain property protects before returning HTTP exception
+  async findByNick(nick: string, plain?: boolean): Promise<Character> {
     logger.write("FIND_USER_BY_SSO", { nick });
     const char = await this.characterRepository.findOne({ nick });
 
-    if (!char) {
+    if (!char && !plain) {
       throw new HttpException("Character not found", HttpStatus.NOT_FOUND);
     }
 

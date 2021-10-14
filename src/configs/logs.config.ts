@@ -45,10 +45,10 @@ export const logsConfig = {
     message: "Finished getting user characters"
   },
   START_INSERTING_CHAR: {
-    message: "Start inserting user"
+    message: "Start inserting character"
   },
   FINISHED_INSERTING_CHAR: {
-    message: "Finished inserting user"
+    message: "Finished inserting character"
   },
   AUTHENTICATED_BY_TOKEN: {
     message: "Authenticated by token"

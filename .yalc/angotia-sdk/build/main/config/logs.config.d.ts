@@ -63,4 +63,14 @@ export declare const logsConfig: {
         message: string;
         level: Log;
     };
+    CREATE_CHARACTER: {
+        message: string;
+    };
+    CREATED_CHARACTER: {
+        message: string;
+    };
+    CREATE_CHARACTER_ERR: {
+        message: string;
+        level: Log;
+    };
 };

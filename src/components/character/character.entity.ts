@@ -31,7 +31,7 @@ export class Character {
 
   // Url to sprite on CDN
   @Column()
-  sprite: string = userConfig.characters.defaultSprite;
+  sprite: string;
 
   @Column()
   level: number = 1;

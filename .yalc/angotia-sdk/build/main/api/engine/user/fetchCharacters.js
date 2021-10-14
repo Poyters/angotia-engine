@@ -43,6 +43,7 @@ exports.fetchCharacters = void 0;
 var logger_1 = require("../../../config/logger");
 var config_1 = require("../config");
 var axios_1 = __importDefault(require("axios"));
+var error_1 = require("../../../config/error");
 /**
  * Fetch all characters assigned to passed user (token)
  *
@@ -56,15 +57,15 @@ var axios_1 = __importDefault(require("axios"));
  * @returns Tuple of [Error, Character[]]
  */
 var fetchCharacters = function (token) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, responseData, error_1;
-    var _a, _b;
-    return __generator(this, function (_c) {
-        switch (_c.label) {
+    var response, responseData, error_2, errorData;
+    var _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
                 logger_1.logger.write("FETCH_USER_CHARACTERS");
-                _c.label = 1;
+                _b.label = 1;
             case 1:
-                _c.trys.push([1, 3, , 4]);
+                _b.trys.push([1, 3, , 4]);
                 return [4 /*yield*/, (0, axios_1.default)(config_1.engineApiUrl + "/user/characters", {
                         method: "GET",
                         headers: {
@@ -72,19 +73,20 @@ var fetchCharacters = function (token) { return __awaiter(void 0, void 0, void 0
                         }
                     })];
             case 2:
-                response = _c.sent();
+                response = _b.sent();
                 responseData = response.data;
                 logger_1.logger.write("FETCHED_USER_CHARACTERS", { responseData: responseData });
                 return [2 /*return*/, [null, responseData]];
             case 3:
-                error_1 = _c.sent();
+                error_2 = _b.sent();
+                errorData = ((_a = error_2 === null || error_2 === void 0 ? void 0 : error_2.response) === null || _a === void 0 ? void 0 : _a.data) || error_1.undefinedError;
                 logger_1.logger.write("FETCH_USER_CHARACTERS_ERR", {
-                    error: (_b = (_a = error_1 === null || error_1 === void 0 ? void 0 : error_1.response) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.statusCode
+                    error: errorData === null || errorData === void 0 ? void 0 : errorData.statusCode
                 });
-                return [2 /*return*/, [error_1.response.data, null]];
+                return [2 /*return*/, [errorData, null]];
             case 4: return [2 /*return*/];
         }
     });
 }); };
 exports.fetchCharacters = fetchCharacters;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmV0Y2hDaGFyYWN0ZXJzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vc3JjL2FwaS9lbmdpbmUvdXNlci9mZXRjaENoYXJhY3RlcnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0EsaURBQWdEO0FBRWhELG9DQUF5QztBQUN6QyxnREFBMEI7QUFFMUI7Ozs7Ozs7Ozs7O0dBV0c7QUFDSSxJQUFNLGVBQWUsR0FBRyxVQUM3QixLQUFhOzs7Ozs7Z0JBRWIsZUFBTSxDQUFDLEtBQUssQ0FBQyx1QkFBdUIsQ0FBQyxDQUFDOzs7O2dCQUduQixxQkFBTSxJQUFBLGVBQUssRUFBSSxxQkFBWSxxQkFBa0IsRUFBRTt3QkFDOUQsTUFBTSxFQUFFLEtBQUs7d0JBQ2IsT0FBTyxFQUFFOzRCQUNQLGFBQWEsRUFBRSxZQUFVLEtBQU87eUJBQ2pDO3FCQUNGLENBQUMsRUFBQTs7Z0JBTEksUUFBUSxHQUFHLFNBS2Y7Z0JBRUksWUFBWSxHQUFHLFFBQVEsQ0FBQyxJQUFJLENBQUM7Z0JBRW5DLGVBQU0sQ0FBQyxLQUFLLENBQUMseUJBQXlCLEVBQUUsRUFBRSxZQUFZLGNBQUEsRUFBRSxDQUFDLENBQUM7Z0JBRTFELHNCQUFPLENBQUMsSUFBSSxFQUFFLFlBQTJCLENBQUMsRUFBQzs7O2dCQUUzQyxlQUFNLENBQUMsS0FBSyxDQUFDLDJCQUEyQixFQUFFO29CQUN4QyxLQUFLLEVBQUUsTUFBQSxNQUFBLE9BQUssYUFBTCxPQUFLLHVCQUFMLE9BQUssQ0FBRSxRQUFRLDBDQUFFLElBQUksMENBQUUsVUFBVTtpQkFDekMsQ0FBQyxDQUFDO2dCQUNILHNCQUFPLENBQUMsT0FBSyxDQUFDLFFBQVEsQ0FBQyxJQUFhLEVBQUUsSUFBSSxDQUFDLEVBQUM7Ozs7S0FFL0MsQ0FBQztBQXhCVyxRQUFBLGVBQWUsbUJBd0IxQiJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmV0Y2hDaGFyYWN0ZXJzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vc3JjL2FwaS9lbmdpbmUvdXNlci9mZXRjaENoYXJhY3RlcnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0EsaURBQWdEO0FBRWhELG9DQUF5QztBQUN6QyxnREFBMEI7QUFDMUIsK0NBQXVEO0FBRXZEOzs7Ozs7Ozs7OztHQVdHO0FBQ0ksSUFBTSxlQUFlLEdBQUcsVUFDN0IsS0FBYTs7Ozs7O2dCQUViLGVBQU0sQ0FBQyxLQUFLLENBQUMsdUJBQXVCLENBQUMsQ0FBQzs7OztnQkFHbkIscUJBQU0sSUFBQSxlQUFLLEVBQUkscUJBQVkscUJBQWtCLEVBQUU7d0JBQzlELE1BQU0sRUFBRSxLQUFLO3dCQUNiLE9BQU8sRUFBRTs0QkFDUCxhQUFhLEVBQUUsWUFBVSxLQUFPO3lCQUNqQztxQkFDRixDQUFDLEVBQUE7O2dCQUxJLFFBQVEsR0FBRyxTQUtmO2dCQUVJLFlBQVksR0FBRyxRQUFRLENBQUMsSUFBSSxDQUFDO2dCQUVuQyxlQUFNLENBQUMsS0FBSyxDQUFDLHlCQUF5QixFQUFFLEVBQUUsWUFBWSxjQUFBLEVBQUUsQ0FBQyxDQUFDO2dCQUUxRCxzQkFBTyxDQUFDLElBQUksRUFBRSxZQUEyQixDQUFDLEVBQUM7OztnQkFFckMsU0FBUyxHQUFHLENBQUMsTUFBQSxPQUFLLGFBQUwsT0FBSyx1QkFBTCxPQUFLLENBQUUsUUFBUSwwQ0FBRSxJQUFjLEtBQUksc0JBQWMsQ0FBQztnQkFFckUsZUFBTSxDQUFDLEtBQUssQ0FBQywyQkFBMkIsRUFBRTtvQkFDeEMsS0FBSyxFQUFFLFNBQVMsYUFBVCxTQUFTLHVCQUFULFNBQVMsQ0FBRSxVQUFVO2lCQUM3QixDQUFDLENBQUM7Z0JBRUgsc0JBQU8sQ0FBQyxTQUFTLEVBQUUsSUFBSSxDQUFDLEVBQUM7Ozs7S0FFNUIsQ0FBQztBQTNCVyxRQUFBLGVBQWUsbUJBMkIxQiJ9

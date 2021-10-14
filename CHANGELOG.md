@@ -6,3 +6,4 @@
 - AG-25, Add `eslint` and `prettier`
 - AG-10, Add ability to create a new character
 - AG-24, Add sprite to character entity
+- AG-8, Connect to a new user configuration

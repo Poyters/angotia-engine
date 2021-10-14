@@ -43,12 +43,13 @@ exports.fetchCharacterByNick = void 0;
 var logger_1 = require("../../../config/logger");
 var axios_1 = __importDefault(require("axios"));
 var config_1 = require("../config");
+var error_1 = require("../../../config/error");
 /**
  * Fetch character by unique nick
  *
  * ### Example
  * ```js
- * fetchCharacterByNick("token")
+ * fetchCharacterByNick("nick")
  * // => [null, Character]
  * ```
  *
@@ -56,33 +57,34 @@ var config_1 = require("../config");
  * @returns Tuple of [Error, Character]
  */
 var fetchCharacterByNick = function (nick) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, responseData, error_1;
-    var _a, _b;
-    return __generator(this, function (_c) {
-        switch (_c.label) {
+    var response, responseData, error_2, errorData;
+    var _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
                 logger_1.logger.write("FETCH_CHARACTER_BY_NICK", { nick: nick });
-                _c.label = 1;
+                _b.label = 1;
             case 1:
-                _c.trys.push([1, 3, , 4]);
+                _b.trys.push([1, 3, , 4]);
                 return [4 /*yield*/, (0, axios_1.default)(config_1.engineApiUrl + "/character/nick/" + nick, {
                         method: "GET"
                     })];
             case 2:
-                response = _c.sent();
+                response = _b.sent();
                 responseData = response.data;
                 logger_1.logger.write("FETCHED_CHARACTER_BY_NICK", { nick: nick, responseData: responseData });
                 return [2 /*return*/, [null, responseData]];
             case 3:
-                error_1 = _c.sent();
+                error_2 = _b.sent();
+                errorData = ((_a = error_2 === null || error_2 === void 0 ? void 0 : error_2.response) === null || _a === void 0 ? void 0 : _a.data) || error_1.undefinedError;
                 logger_1.logger.write("FETCH_CHARACTER_BY_NICK_ERR", {
                     nick: nick,
-                    error: (_b = (_a = error_1 === null || error_1 === void 0 ? void 0 : error_1.response) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.statusCode
+                    error: errorData === null || errorData === void 0 ? void 0 : errorData.statusCode
                 });
-                return [2 /*return*/, [error_1.response.data, null]];
+                return [2 /*return*/, [errorData, null]];
             case 4: return [2 /*return*/];
         }
     });
 }); };
 exports.fetchCharacterByNick = fetchCharacterByNick;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmV0Y2hDaGFyYWN0ZXJCeU5pY2suanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi9zcmMvYXBpL2VuZ2luZS9jaGFyYWN0ZXIvZmV0Y2hDaGFyYWN0ZXJCeU5pY2sudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0EsaURBQWdEO0FBRWhELGdEQUEwQjtBQUMxQixvQ0FBeUM7QUFFekM7Ozs7Ozs7Ozs7O0dBV0c7QUFDSSxJQUFNLG9CQUFvQixHQUFHLFVBQ2xDLElBQVk7Ozs7OztnQkFFWixlQUFNLENBQUMsS0FBSyxDQUFDLHlCQUF5QixFQUFFLEVBQUUsSUFBSSxNQUFBLEVBQUUsQ0FBQyxDQUFDOzs7O2dCQUcvQixxQkFBTSxJQUFBLGVBQUssRUFBSSxxQkFBWSx3QkFBbUIsSUFBTSxFQUFFO3dCQUNyRSxNQUFNLEVBQUUsS0FBSztxQkFDZCxDQUFDLEVBQUE7O2dCQUZJLFFBQVEsR0FBRyxTQUVmO2dCQUVJLFlBQVksR0FBRyxRQUFRLENBQUMsSUFBSSxDQUFDO2dCQUVuQyxlQUFNLENBQUMsS0FBSyxDQUFDLDJCQUEyQixFQUFFLEVBQUUsSUFBSSxNQUFBLEVBQUUsWUFBWSxjQUFBLEVBQUUsQ0FBQyxDQUFDO2dCQUVsRSxzQkFBTyxDQUFDLElBQUksRUFBRSxZQUF5QixDQUFDLEVBQUM7OztnQkFFekMsZUFBTSxDQUFDLEtBQUssQ0FBQyw2QkFBNkIsRUFBRTtvQkFDMUMsSUFBSSxNQUFBO29CQUNKLEtBQUssRUFBRSxNQUFBLE1BQUEsT0FBSyxhQUFMLE9BQUssdUJBQUwsT0FBSyxDQUFFLFFBQVEsMENBQUUsSUFBSSwwQ0FBRSxVQUFVO2lCQUN6QyxDQUFDLENBQUM7Z0JBQ0gsc0JBQU8sQ0FBQyxPQUFLLENBQUMsUUFBUSxDQUFDLElBQWEsRUFBRSxJQUFJLENBQUMsRUFBQzs7OztLQUUvQyxDQUFDO0FBdEJXLFFBQUEsb0JBQW9CLHdCQXNCL0IifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmV0Y2hDaGFyYWN0ZXJCeU5pY2suanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi9zcmMvYXBpL2VuZ2luZS9jaGFyYWN0ZXIvZmV0Y2hDaGFyYWN0ZXJCeU5pY2sudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0EsaURBQWdEO0FBRWhELGdEQUEwQjtBQUMxQixvQ0FBeUM7QUFDekMsK0NBQXVEO0FBRXZEOzs7Ozs7Ozs7OztHQVdHO0FBQ0ksSUFBTSxvQkFBb0IsR0FBRyxVQUNsQyxJQUFZOzs7Ozs7Z0JBRVosZUFBTSxDQUFDLEtBQUssQ0FBQyx5QkFBeUIsRUFBRSxFQUFFLElBQUksTUFBQSxFQUFFLENBQUMsQ0FBQzs7OztnQkFHL0IscUJBQU0sSUFBQSxlQUFLLEVBQUkscUJBQVksd0JBQW1CLElBQU0sRUFBRTt3QkFDckUsTUFBTSxFQUFFLEtBQUs7cUJBQ2QsQ0FBQyxFQUFBOztnQkFGSSxRQUFRLEdBQUcsU0FFZjtnQkFFSSxZQUFZLEdBQUcsUUFBUSxDQUFDLElBQUksQ0FBQztnQkFFbkMsZUFBTSxDQUFDLEtBQUssQ0FBQywyQkFBMkIsRUFBRSxFQUFFLElBQUksTUFBQSxFQUFFLFlBQVksY0FBQSxFQUFFLENBQUMsQ0FBQztnQkFFbEUsc0JBQU8sQ0FBQyxJQUFJLEVBQUUsWUFBeUIsQ0FBQyxFQUFDOzs7Z0JBRW5DLFNBQVMsR0FBRyxDQUFDLE1BQUEsT0FBSyxhQUFMLE9BQUssdUJBQUwsT0FBSyxDQUFFLFFBQVEsMENBQUUsSUFBYyxLQUFJLHNCQUFjLENBQUM7Z0JBRXJFLGVBQU0sQ0FBQyxLQUFLLENBQUMsNkJBQTZCLEVBQUU7b0JBQzFDLElBQUksTUFBQTtvQkFDSixLQUFLLEVBQUUsU0FBUyxhQUFULFNBQVMsdUJBQVQsU0FBUyxDQUFFLFVBQVU7aUJBQzdCLENBQUMsQ0FBQztnQkFFSCxzQkFBTyxDQUFDLFNBQVMsRUFBRSxJQUFJLENBQUMsRUFBQzs7OztLQUU1QixDQUFDO0FBekJXLFFBQUEsb0JBQW9CLHdCQXlCL0IifQ==

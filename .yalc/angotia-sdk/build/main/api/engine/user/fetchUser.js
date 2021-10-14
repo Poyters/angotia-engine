@@ -43,6 +43,7 @@ exports.fetchUser = void 0;
 var logger_1 = require("../../../config/logger");
 var config_1 = require("../config");
 var axios_1 = __importDefault(require("axios"));
+var error_1 = require("../../../config/error");
 /**
  * Creates Angotia user (API) based on token. There is possibility to create
  * only one "Angotia Account" related to SSO account. So sso id is hightly
@@ -58,15 +59,15 @@ var axios_1 = __importDefault(require("axios"));
  * @returns Tuple of [Error, User]
  */
 var fetchUser = function (token) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, responseData, error_1;
-    var _a, _b;
-    return __generator(this, function (_c) {
-        switch (_c.label) {
+    var response, responseData, error_2, errorData;
+    var _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
                 logger_1.logger.write("FETCHING_ANGOTIA_USER");
-                _c.label = 1;
+                _b.label = 1;
             case 1:
-                _c.trys.push([1, 3, , 4]);
+                _b.trys.push([1, 3, , 4]);
                 return [4 /*yield*/, (0, axios_1.default)(config_1.engineApiUrl + "/user/profile", {
                         method: "GET",
                         headers: {
@@ -74,19 +75,20 @@ var fetchUser = function (token) { return __awaiter(void 0, void 0, void 0, func
                         }
                     })];
             case 2:
-                response = _c.sent();
+                response = _b.sent();
                 responseData = response.data;
                 logger_1.logger.write("FETCHED_ANGOTIA_USER", { responseData: responseData });
                 return [2 /*return*/, [null, responseData]];
             case 3:
-                error_1 = _c.sent();
+                error_2 = _b.sent();
+                errorData = ((_a = error_2 === null || error_2 === void 0 ? void 0 : error_2.response) === null || _a === void 0 ? void 0 : _a.data) || error_1.undefinedError;
                 logger_1.logger.write("FETCH_ANGOTIA_USER_ERROR", {
-                    error: (_b = (_a = error_1 === null || error_1 === void 0 ? void 0 : error_1.response) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.statusCode
+                    error: errorData === null || errorData === void 0 ? void 0 : errorData.statusCode
                 });
-                return [2 /*return*/, [error_1.response.data, null]];
+                return [2 /*return*/, [errorData, null]];
             case 4: return [2 /*return*/];
         }
     });
 }); };
 exports.fetchUser = fetchUser;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmV0Y2hVc2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vc3JjL2FwaS9lbmdpbmUvdXNlci9mZXRjaFVzZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0EsaURBQWdEO0FBRWhELG9DQUF5QztBQUN6QyxnREFBMEI7QUFFMUI7Ozs7Ozs7Ozs7Ozs7R0FhRztBQUNJLElBQU0sU0FBUyxHQUFHLFVBQU8sS0FBYTs7Ozs7O2dCQUMzQyxlQUFNLENBQUMsS0FBSyxDQUFDLHVCQUF1QixDQUFDLENBQUM7Ozs7Z0JBR25CLHFCQUFNLElBQUEsZUFBSyxFQUFJLHFCQUFZLGtCQUFlLEVBQUU7d0JBQzNELE1BQU0sRUFBRSxLQUFLO3dCQUNiLE9BQU8sRUFBRTs0QkFDUCxhQUFhLEVBQUUsWUFBVSxLQUFPO3lCQUNqQztxQkFDRixDQUFDLEVBQUE7O2dCQUxJLFFBQVEsR0FBRyxTQUtmO2dCQUVJLFlBQVksR0FBRyxRQUFRLENBQUMsSUFBSSxDQUFDO2dCQUVuQyxlQUFNLENBQUMsS0FBSyxDQUFDLHNCQUFzQixFQUFFLEVBQUUsWUFBWSxjQUFBLEVBQUUsQ0FBQyxDQUFDO2dCQUV2RCxzQkFBTyxDQUFDLElBQUksRUFBRSxZQUFvQixDQUFDLEVBQUM7OztnQkFFcEMsZUFBTSxDQUFDLEtBQUssQ0FBQywwQkFBMEIsRUFBRTtvQkFDdkMsS0FBSyxFQUFFLE1BQUEsTUFBQSxPQUFLLGFBQUwsT0FBSyx1QkFBTCxPQUFLLENBQUUsUUFBUSwwQ0FBRSxJQUFJLDBDQUFFLFVBQVU7aUJBQ3pDLENBQUMsQ0FBQztnQkFDSCxzQkFBTyxDQUFDLE9BQUssQ0FBQyxRQUFRLENBQUMsSUFBYSxFQUFFLElBQUksQ0FBQyxFQUFDOzs7O0tBRS9DLENBQUM7QUF0QlcsUUFBQSxTQUFTLGFBc0JwQiJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmV0Y2hVc2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vc3JjL2FwaS9lbmdpbmUvdXNlci9mZXRjaFVzZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0EsaURBQWdEO0FBRWhELG9DQUF5QztBQUN6QyxnREFBMEI7QUFDMUIsK0NBQXVEO0FBRXZEOzs7Ozs7Ozs7Ozs7O0dBYUc7QUFDSSxJQUFNLFNBQVMsR0FBRyxVQUFPLEtBQWE7Ozs7OztnQkFDM0MsZUFBTSxDQUFDLEtBQUssQ0FBQyx1QkFBdUIsQ0FBQyxDQUFDOzs7O2dCQUduQixxQkFBTSxJQUFBLGVBQUssRUFBSSxxQkFBWSxrQkFBZSxFQUFFO3dCQUMzRCxNQUFNLEVBQUUsS0FBSzt3QkFDYixPQUFPLEVBQUU7NEJBQ1AsYUFBYSxFQUFFLFlBQVUsS0FBTzt5QkFDakM7cUJBQ0YsQ0FBQyxFQUFBOztnQkFMSSxRQUFRLEdBQUcsU0FLZjtnQkFFSSxZQUFZLEdBQUcsUUFBUSxDQUFDLElBQUksQ0FBQztnQkFFbkMsZUFBTSxDQUFDLEtBQUssQ0FBQyxzQkFBc0IsRUFBRSxFQUFFLFlBQVksY0FBQSxFQUFFLENBQUMsQ0FBQztnQkFFdkQsc0JBQU8sQ0FBQyxJQUFJLEVBQUUsWUFBb0IsQ0FBQyxFQUFDOzs7Z0JBRTlCLFNBQVMsR0FBRyxDQUFDLE1BQUEsT0FBSyxhQUFMLE9BQUssdUJBQUwsT0FBSyxDQUFFLFFBQVEsMENBQUUsSUFBYyxLQUFJLHNCQUFjLENBQUM7Z0JBRXJFLGVBQU0sQ0FBQyxLQUFLLENBQUMsMEJBQTBCLEVBQUU7b0JBQ3ZDLEtBQUssRUFBRSxTQUFTLGFBQVQsU0FBUyx1QkFBVCxTQUFTLENBQUUsVUFBVTtpQkFDN0IsQ0FBQyxDQUFDO2dCQUVILHNCQUFPLENBQUMsU0FBUyxFQUFFLElBQUksQ0FBQyxFQUFDOzs7O0tBRTVCLENBQUM7QUF6QlcsUUFBQSxTQUFTLGFBeUJwQiJ9

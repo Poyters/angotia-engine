@@ -5,7 +5,7 @@ import { Result } from "../../../types/result.type";
  *
  * ### Example
  * ```js
- * fetchCharacterByNick("token")
+ * fetchCharacterByNick("nick")
  * // => [null, Character]
  * ```
  *
