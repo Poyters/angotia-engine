@@ -33,3 +33,4 @@ dist
 .env
 .yalc
 /.yalc
+yalc.lock
