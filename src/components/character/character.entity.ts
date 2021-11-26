@@ -10,6 +10,7 @@ import {
 import { v4 as uuid } from "uuid";
 import { Gender, Position, userConfig } from "angotia-sdk";
 import { User } from "components/user/user.entity";
+import { ApiProperty } from "@nestjs/swagger";
 
 @Entity("character")
 export class Character {
@@ -36,6 +37,11 @@ export class Character {
   @Column()
   level: number = 1;
 
+  @ApiProperty({
+    type: "json",
+    description: "Current position of character",
+    default: userConfig.characters.position
+  })
   @Column({ type: "json" })
   position: Position = {
     mapId: userConfig.characters.position.default.mapId,

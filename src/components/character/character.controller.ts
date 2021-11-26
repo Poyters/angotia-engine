@@ -23,4 +23,10 @@ export class CharacterController {
   async getByNick(@Param("nick") nick: string) {
     return this.characterService.findByNick(nick);
   }
+
+  @Get("position/:id")
+  @Unprotected()
+  async getPosition(@Param("id") id: string) {
+    return this.characterService.getPosition(id);
+  }
 }

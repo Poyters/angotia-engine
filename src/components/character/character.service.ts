@@ -5,7 +5,7 @@ import { logger } from "../../scripts/utils/logger";
 import { Repository } from "typeorm";
 import { Character } from "./character.entity";
 import { UserService } from "components/user/user.service";
-import { userConfig } from "angotia-sdk";
+import { userConfig, Position } from "angotia-sdk";
 import { NewCharacterDto } from "./newCharacter.dto";
 
 @Injectable()
@@ -56,7 +56,6 @@ export class CharacterService {
     if (!newCharacterDto?.sprite) {
       const defaultSprite =
         userConfig.characters.sprite.default[newCharacterDto.gender];
-      console.log("defaultSprite", defaultSprite);
       newCharacter.sprite = defaultSprite;
     }
 
@@ -67,12 +66,33 @@ export class CharacterService {
     return newCharacter;
   }
 
-  // Plain property protects before returning HTTP exception
+  /* 
+    Plain property protects before returning HTTP exception
+    plain = true -> without HTTP Exception
+  */
   async findByNick(nick: string, plain?: boolean): Promise<Character> {
     logger.write("FIND_USER_BY_SSO", { nick });
     const char = await this.characterRepository.findOne({ nick });
 
     if (!char && !plain) {
+      throw new HttpException("Character not found", HttpStatus.NOT_FOUND);
+    }
+
+    return char;
+  }
+
+  async getPosition(id: string): Promise<Position> {
+    logger.write("GET_CHAR_POSITION", { id });
+    const char = await this.findById(id);
+
+    return char.position;
+  }
+
+  private async findById(id: string): Promise<Character> {
+    logger.write("FIND_CHAR_BY_ID", { id });
+    const char = await this.characterRepository.findOne(id);
+
+    if (!char) {
       throw new HttpException("Character not found", HttpStatus.NOT_FOUND);
     }
 

@@ -52,5 +52,11 @@ export const logsConfig = {
   },
   AUTHENTICATED_BY_TOKEN: {
     message: "Authenticated by token"
+  },
+  FIND_CHAR_BY_ID: {
+    message: "Started looking for character by passed id"
+  },
+  GET_CHAR_POSITION: {
+    message: "Started looking for character position by passed id"
   }
 };
