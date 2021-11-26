@@ -8,7 +8,7 @@ import {
   Index
 } from "typeorm";
 import { v4 as uuid } from "uuid";
-import { Gender, userConfig } from "angotia-sdk";
+import { Gender, Position, userConfig } from "angotia-sdk";
 import { User } from "components/user/user.entity";
 
 @Entity("character")
@@ -35,6 +35,13 @@ export class Character {
 
   @Column()
   level: number = 1;
+
+  @Column({ type: "json" })
+  position: Position = {
+    mapId: userConfig.characters.position.default.mapId,
+    x: userConfig.characters.position.default.x,
+    y: userConfig.characters.position.default.y
+  };
 
   @ManyToOne(
     () => User,
