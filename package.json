@@ -37,6 +37,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "fastify-helmet": "^5.3.2",
     "fastify-swagger": "^4.9.0",
+    "graphql": "^16.0.1",
     "keycloak-connect": "^15.0.2",
     "mongoose": "^5.12.9",
     "nest-keycloak-connect": "^1.7.5",
