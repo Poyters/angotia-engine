@@ -1,16 +1,18 @@
 # Angotia Engine
-
-## What is Angotia?
-Angotia is MMORPG browser game crafted from scratch by Rafał Kostecki.
-
-## What is Angotia Engine?
 Angotia Engine is a REST API service that provides most of the game functionalities like:
 - User managment
 - Characters managment
 - Movement & collistions system
 - And much more...
 
-## Technology
+## What is Angotia?
+Angotia is MMORPG browser game crafted from scratch by Rafał Kostecki.
+
+### About Angotia ecosystem
+
+![alt text](./docs/images/project-relations.png)
+
+## Technology behind the Angotia Engine
 ### Database
 **PostgreSQL** - The choice of SQL database was brilliant. The game stores a lot of data that is consistent and predictable. In this case, PostgreSQL benefit from the *ACID* model and *distributed transactions*.
 
