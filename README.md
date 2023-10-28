@@ -24,4 +24,5 @@ Angotia Engine is a REST API service that provides most of the game functionalit
 
 ### Others
 **Angotia SDK** - It is a Software Development Kit created from scratch that provides common functions between Angotia microservices, such as contract, interfaces, tools and so on. I create it to do not copy same utils and data between microservices, and to have a singile source of truth in terms of contract, interfaces.
+**Grafana&Prometheus** - I chose it because it's free and open source solution for monitoring and the ability to self-host so as not to be tied to one service provider.
 
